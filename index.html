@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brooks Property Tax Year in Review - Estimate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Wrapped Theme Colors */
+            --color-wrapped-bg: #121212; /* Very Dark Background */
+            --color-wrapped-card: #282828; /* Dark Card Background */
+            --color-wrapped-primary: #ff9936; /* NEW ORANGE Accent */
+            --color-wrapped-secondary: #ff3371; /* Hot Pink Accent */
+            --color-wrapped-tertiary: #a980ff; /* Deep Violet Accent */
+            --color-wrapped-text: #ffffff;
+            --color-wrapped-text-dim: #c0c0c0;
+        }
+        
+        /* Set base for full-screen, scrollable experience */
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow-y: auto; /* Allow main body scrolling */
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-wrapped-bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--color-wrapped-text);
+            scroll-behavior: smooth; /* Smooth scrolling */
+        }
+        
+        .wrapped-container {
+            /* Full screen width and height on ALL devices */
+            width: 100%; 
+            max-width: none; 
+            position: relative;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            min-height: 100vh;
+            background: var(--color-wrapped-bg); 
+        }
+        
+        .content-wrapper {
+            max-width: 80rem; /* Wide constraint for desktop content */
+            width: 100%;
+            height: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 40px; /* Side padding on desktop */
+        }
+
+        
+        .slide-page {
+            /* Each section is a full viewport height page */
+            height: 100vh;
+            min-height: 500px; /* Minimum height for very small devices */
+            padding: 40px 0; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            position: relative;
+            background: transparent; /* Use transparent so the container's background shines through */
+            flex-shrink: 0; 
+            overflow: hidden; /* Prevent content overflow */
+        }
+        
+        /* General Mobile adjustment for inner content */
+        @media (max-width: 768px) {
+            .content-wrapper {
+                padding: 0 20px; /* Tighter padding on mobile */
+            }
+        }
+
+        .input-card {
+            background-color: #3e3e3e;
+        }
+        
+        /* Input field style */
+        #assessmentInput {
+            -webkit-appearance: none;
+            -moz-appearance: textfield;
+            font-family: 'Montserrat', sans-serif; 
+            letter-spacing: 0.05em; 
+            color: var(--color-wrapped-text);
+            background-color: #4a4a4a;
+        }
+        
+        .title-montserrat {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Utility for text colors */
+        .text-wrapped-primary { color: var(--color-wrapped-primary); }
+        .text-wrapped-secondary { color: var(--color-wrapped-secondary); }
+        .text-wrapped-tertiary { color: var(--color-wrapped-tertiary); }
+
+        /* Added glow effect for the title */
+        .wrapped-glow-shadow {
+            color: var(--color-wrapped-primary);
+            text-shadow: 0 0 5px rgba(255, 153, 54, 0.7), 0 0 10px rgba(255, 153, 54, 0.5), 0 0 15px rgba(255, 153, 54, 0.3);
+            transition: text-shadow 0.3s ease-in-out;
+        }
+
+        .nav-buttons-container { display: none; } 
+
+        /* === SCROLL INDICATOR STYLES === */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .scroll-indicator {
+            position: fixed; /* Fixed position */
+            bottom: 20px;
+            left: 50%; /* Correctly centered */
+            transform: translateX(-50%); /* Correctly centered */
+            animation: bounce 2s infinite;
+            transition: opacity 0.3s; /* Smooth visibility change */
+            pointer-events: none; /* Make it unclickable */
+            opacity: 0.9;
+            z-index: 50; /* Ensure it stays on top */
+        }
+        .scroll-indicator.hidden {
+            opacity: 0;
+        }
+        /* === END SCROLL INDICATOR STYLES === */
+
+    </style>
+</head>
+<body class="p-0">
+    
+    <!-- Main Wrapped Container (Full screen) -->
+    <div id="wrapped-content" class="wrapped-container border-4 border-white/10">
+
+        
+        <!-- PAGE 1: HEADER & INPUT -->
+        <div id="page-1" class="slide-page">
+            <div class="content-wrapper flex flex-col items-center justify-center relative z-10">
+                <div class="text-center mb-6 max-w-4xl"> <!-- Increased max-w for better alignment -->
+                    <h2 class="text-xl font-bold uppercase tracking-widest mb-1 title-montserrat text-wrapped-primary">
+                        City of Brooks
+                    </h2>
+                    <!-- Title with Orange Color and Glow -->
+                    <h1 class="text-6xl sm:text-7xl font-black title-montserrat text-wrapped-primary wrapped-glow-shadow inline-block">
+                        YEAR IN REVIEW
+                    </h1>
+                    <!-- Description width now aligns with h1's container -->
+                    <p class="text-lg font-medium mt-3 text-white/90 mx-auto">
+                        Ever wondered where <span class="font-bold">your property taxes</span> went? Here’s your personalized breakdown—just enter your assessment!
+                    </p>
+                </div>
+                <!-- Section 1: Assessment Input -->
+                <div class="mb-10 input-card p-6 rounded-xl text-center max-w-md w-full relative z-10">
+                    <!-- Updated Input Label -->
+                    <label for="assessmentInput" class="text-xl font-medium block mb-3 text-white/80 font-inter">
+                        Enter your property assessment =
+                    </label>
+                    <div class="flex justify-center items-center">
+                        <span class="text-5xl mr-2 text-wrapped-primary font-bold title-montserrat">$</span>
+                        <input
+                            type="text"
+                            id="assessmentInput"
+                            value="350,000"
+                            min="1"
+                            class="text-5xl font-black p-3 w-64 text-center border-0 rounded-lg focus:ring-4 focus:ring-wrapped-secondary transition duration-150 title-montserrat"
+                            oninput="formatAssessmentInput(this); calculateTaxes();"
+                        >
+                    </div>
+                    <p class="text-xs mt-3 text-white/50 text-center font-inter">
+                        Based on <span class="font-bold">Estimated</span> 2025 Mill Rate: <span id="millRateDisplay2025" class="font-bold text-white/70"></span> per $1,000
+                    </p>
+                </div>
+                <!-- Disclaimer and Footnote -->
+                <div class="mt-6 text-center max-w-2xl relative z-10">
+                    <p class="text-sm font-semibold text-white/60 mb-2">
+                        This is an <span class="font-bold">estimate</span> based on the proposed budget. Your final tax notice may vary.
+                    </p>
+                    <p class="text-xs text-white/40">
+                        Disclaimer: For reference only—the <span class="font-bold">final, audited numbers for this period will be available in March</span>. This breakdown is based on the proposed 2025 budget.
+                    </p>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- PAGE 2: TOTAL TAX BILL REVEAL -->
+        <div id="page-2" class="slide-page">
+            <div class="content-wrapper flex flex-col items-center justify-center text-center">
+                <h3 class="text-2xl font-semibold uppercase text-white/70 tracking-wider mb-6">
+                    2. The Headline Stat
+                </h3>
+                <p class="text-3xl sm:text-4xl font-bold mb-4">
+                    Your Total Property Tax Bill Was...
+                </p>
+                <span id="totalTaxDisplay" class="text-7xl md:text-8xl font-extrapold mt-3 block title-montserrat" style="color: var(--color-wrapped-secondary);"></span>
+                <p class="text-xl mt-6 text-white/80">
+                    That's your estimated contribution to the City of Brooks for the year.
+                </p>
+            </div>
+        </div>
+
+        <!-- PAGE 3: PRIMARY ALLOCATION (The Big Three) -->
+        <div id="page-3" class="slide-page">
+            <div class="content-wrapper flex flex-col items-center justify-center text-center">
+                <h3 class="text-3xl font-black text-white/90 title-montserrat mb-6">
+                    3. Where Your Dollars Went
+                </h3>
+                <p class="text-xl text-white/70 mb-8 font-inter">
+                    This is how your estimated total tax of <span id="taxValuePlaceholder" class="font-extrabold text-wrapped-secondary">$0.00</span> was divided:
+                </p>
+                <div id="primaryBreakdown" class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center max-w-5xl w-full">
+                    <!-- Cards generated here by JS and are now immediately visible -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- PAGE 4: MUNICIPAL DEEP DIVE (NEW TANGIBLE BREAKDOWN) -->
+        <div id="page-4" class="slide-page" style="height: auto; min-height: 100vh;">
+            <div class="content-wrapper flex flex-col items-center justify-center py-10">
+                <h3 class="text-3xl font-black mb-4 text-wrapped-primary title-montserrat">
+                    4. Your Dollar's Impact
+                </h3>
+                <p class="text-lg text-white/70 mb-8 font-inter text-center max-w-3xl">
+                    Your Municipal tax portion of <span id="municipalValuePlaceholder" class="font-extrabold text-wrapped-primary">$0.00</span> funded these specific services and items, accounting for **100%** of your municipal tax:
+                </p>
+                <div id="departmentDeepDive" class="space-y-4 max-w-4xl w-full">
+                    <!-- Tangible Breakdown List generated here by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 5: UTILITIES -->
+        <div id="page-5" class="slide-page">
+            <div class="content-wrapper flex flex-col items-center justify-center text-center">
+                <h3 class="text-3xl font-black mb-6 text-white/90 title-montserrat">
+                    5. Utilities Keep Brooks Flowing
+                </h3>
+                <p class="text-xl text-white/70 mb-10 font-inter">
+                    Your utility fees ensure these essential services run year-round:
+                </p>
+                <ul class="space-y-6 max-w-3xl w-full">
+                    <li class="flex items-center p-4 rounded-xl border border-white/20 hover:border-wrapped-primary transition duration-300 text-left" style="background-color: #2e2e2e;">
+                        <span class="text-4xl mr-4 leading-none">💧</span>
+                        <span class="font-bold text-xl">Water Supply & Treatment</span>
+                    </li>
+                    <li class="flex items-center p-4 rounded-xl border border-white/20 hover:border-wrapped-primary transition duration-300 text-left" style="background-color: #2e2e2e;">
+                        <span class="text-4xl mr-4 leading-none">♻️</span>
+                        <span class="font-bold text-xl">Sewer & Wastewater Management</span>
+                    </li>
+                    <li class="flex items-center p-4 rounded-xl border border-white/20 hover:border-wrapped-primary transition duration-300 text-left" style="background-color: #2e2e2e;">
+                        <span class="text-4xl mr-4 leading-none">🗑️</span>
+                        <span class="font-bold text-xl">Garbage & Yard Waste Collection</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- PAGE 6: 2025 PROJECTS (Updated for visual appeal) -->
+        <div id="page-6" class="slide-page" style="height: auto; min-height: 100vh;">
+            <div class="content-wrapper flex flex-col items-center justify-center py-10">
+                <h3 class="text-3xl font-black mb-6 text-white/90 title-montserrat">
+                    6. Projects Completed in 2025
+                </h3>
+                <p class="text-xl text-white/70 mb-8 font-inter text-center max-w-3xl">
+                    Infrastructure and community projects funded by your 2025 tax contribution:
+                </p>
+                <!-- START: Updated Grid Layout for Projects -->
+                <div id="projectList" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl w-full">
+                    
+                    <!-- Infrastructure Projects -->
+                    
+                    <div class="bg-[#2e2e2e] p-6 rounded-xl border border-white/10 flex flex-col items-start transition duration-300 hover:border-wrapped-secondary hover:shadow-2xl">
+                        <span class="text-5xl mb-2 text-wrapped-secondary">🚧</span>
+                        <p class="font-bold text-xl text-white">Annual Street Improvement</p>
+                        <p class="text-sm text-white/60">(Roads and Paving)</p>
+                    </div>
+
+                    <div class="bg-[#2e2e2e] p-6 rounded-xl border border-white/10 flex flex-col items-start transition duration-300 hover:border-wrapped-primary hover:shadow-2xl">
+                        <span class="text-5xl mb-2 text-wrapped-primary">💧</span>
+                        <p class="font-bold text-xl text-white">Water Main Replacements</p>
+                        <p class="text-sm text-white/60">(Critical Infrastructure Upgrades)</p>
+                    </div>
+
+                    <div class="bg-[#2e2e2e] p-6 rounded-xl border border-white/10 flex flex-col items-start transition duration-300 hover:border-wrapped-tertiary hover:shadow-2xl">
+                        <span class="text-5xl mb-2 text-wrapped-tertiary">⚙️</span>
+                        <p class="font-bold text-xl text-white">Sewer Main Replacements</p>
+                        <p class="text-sm text-white/60">(System Integrity & Flow)</p>
+                    </div>
+
+                    <!-- Recreation/Community Projects -->
+                    
+                    <div class="bg-[#2e2e2e] p-6 rounded-xl border border-white/10 flex flex-col items-start transition duration-300 hover:border-wrapped-primary hover:shadow-2xl">
+                        <span class="text-5xl mb-2 text-wrapped-primary">🌳</span>
+                        <p class="font-bold text-xl text-white">Trail Beautification</p>
+                        <p class="text-sm text-white/60">(New Landscaping and Benches)</p>
+                    </div>
+
+                    <div class="bg-[#2e2e2e] p-6 rounded-xl border border-white/10 flex flex-col items-start transition duration-300 hover:border-wrapped-secondary hover:shadow-2xl">
+                        <span class="text-5xl mb-2 text-wrapped-secondary">💪</span>
+                        <p class="font-bold text-xl text-white">Fitness Equipment Replacement</p>
+                        <p class="text-sm text-white/60">(Updated equipment for public fitness facilities)</p>
+                    </div>
+
+                    <div class="bg-[#2e2e2e] p-6 rounded-xl border border-white/10 flex flex-col items-start transition duration-300 hover:border-wrapped-tertiary hover:shadow-2xl">
+                        <span class="text-5xl mb-2 text-wrapped-tertiary">🛹</span>
+                        <p class="font-bold text-xl text-white">Skateboard Park</p>
+                        <p class="text-sm text-white/60">(New Installation & Concrete Work)</p>
+                    </div>
+
+                    <div class="bg-[#2e2e2e] p-6 rounded-xl border border-white/10 flex flex-col items-start transition duration-300 hover:border-wrapped-secondary hover:shadow-2xl">
+                        <span class="text-5xl mb-2 text-wrapped-secondary">💦</span>
+                        <p class="font-bold text-xl text-white">Uplands Spray Park</p>
+                        <p class="text-sm text-white/60">(Refurbishment and Feature Upgrades)</p>
+                    </div>
+                    
+                </div>
+                <!-- END: Updated Grid Layout for Projects -->
+            </div>
+        </div>
+        
+        <!-- PAGE 7: QUICK FACTS (Detailed Infrastructure & Funding) -->
+        <div id="page-7" class="slide-page" style="height: auto; min-height: 100vh;">
+            <div class="content-wrapper flex flex-col items-center justify-center py-10">
+                <h3 class="text-3xl font-black mb-10 text-white/90 title-montserrat text-center">
+                    7. Your Brooks Tax Beat: Quick Facts
+                </h3>
+                
+                <div class="space-y-8 max-w-6xl w-full">
+                    
+                    <!-- Infrastructure Section: TRANSPORTATION & PARKS (Two columns on desktop) -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <!-- Transportation Facts -->
+                        <div class="p-8 rounded-3xl bg-wrapped-card border-4 border-wrapped-primary shadow-xl">
+                            <h4 class="text-2xl font-black title-montserrat text-wrapped-primary mb-4 flex items-center">
+                                🚧 Transportation
+                            </h4>
+                            <ul class="space-y-2 text-white/80 text-lg list-none p-0 ml-0">
+                                <li><span class="font-bold text-white">118 km</span> Paved Roads</li>
+                                <li><span class="font-bold text-white">38 km</span> Laneways</li>
+                                <li><span class="font-bold text-white">153 km</span> Sidewalks</li>
+                                <li><span class="font-bold text-white">108 km</span> Sewer Lines</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Parks Facts -->
+                        <div class="p-8 rounded-3xl bg-wrapped-card border-4 border-wrapped-secondary shadow-xl">
+                            <h4 class="text-2xl font-black title-montserrat text-wrapped-secondary mb-4 flex items-center">
+                                🌳 Parks
+                            </h4>
+                            <ul class="space-y-2 text-white/80 text-lg list-none p-0 ml-0">
+                                <li><span class="font-bold text-white">25</span> Parks</li>
+                                <li><span class="font-bold text-white">271 Acres</span> of Irrigated Green Space</li>
+                                <li><span class="font-bold text-white">5000+</span> Sprinkler Heads!</li>
+                                <li><span class="font-bold text-white">14,000 Linear Metres</span> of Pathways</li>
+                                <li>Multiple tennis courts, baseball diamonds, and outdoor rinks.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Did You Know? Provincial Funding Drop -->
+                    <div class="p-8 rounded-3xl text-center bg-wrapped-card border-4 border-wrapped-tertiary shadow-xl max-w-4xl mx-auto">
+                        <h4 class="text-2xl font-black title-montserrat text-wrapped-tertiary mb-4">
+                            🚨 Did You Know?
+                        </h4>
+                        <p class="text-xl font-bold mb-6 text-white">
+                            Provincial Funding for Municipalities Has Dropped Significantly!
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-white/90">
+                            <div class="bg-[#3e3e3e] p-4 rounded-xl">
+                                <p class="text-sm uppercase font-semibold text-wrapped-tertiary">2018–2021 (Average Annually)</p>
+                                <p class="text-3xl font-extrabold title-montserrat">$2.59M</p>
+                            </div>
+                            <div class="bg-[#3e3e3e] p-4 rounded-xl">
+                                <p class="text-sm uppercase font-semibold text-wrapped-tertiary">2022–2025 (Average Annually)</p>
+                                <p class="text-3xl font-extrabold title-montserrat">$1.69M</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <p class="mt-12 text-center text-sm text-white/50 max-w-lg">
+                    Data compiled from the estimated 2025 City of Brooks budget and mill rate calculations.
+                </p>
+            </div>
+        </div>
+        <!-- === END PAGE 7 === -->
+    </div>
+
+    <!-- Scroll Indicator (Moved outside of page-1 for fixed positioning) -->
+    <div class="scroll-indicator text-white/80 flex flex-col items-center z-50">
+        <p class="text-sm uppercase font-semibold tracking-wider mb-2">Scroll Down</p>
+        <!-- Arrow color updated to text-wrapped-primary -->
+        <svg class="w-8 h-8 text-wrapped-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </div>
+
+    <script>
+        // --- CONSTANTS ---
+        const RAW_MILL_RATE_2025 = 10.961423;
+        const MILL_RATE_PER_DOLLAR_2025 = RAW_MILL_RATE_2025 / 1000; 
+        
+        // Primary Tax Breakdown (of Total Tax Bill)
+        const PRIMARY_BREAKDOWN = [
+            { name: "Municipal", percentage: 0.77, color: 'var(--color-wrapped-primary)', icon: '🏠' },
+            { name: "Education", percentage: 0.22, color: 'var(--color-wrapped-secondary)', icon: '📚' },
+            { name: "Newell Fdn", percentage: 0.01, color: 'var(--color-wrapped-tertiary)', icon: '👵' }
+        ];
+        
+        // Departmental Breakdown (of the MUNICIPAL PORTION ONLY)
+        // Cents represent percentage of the Municipal Portion. Total is adjusted to 100.00%
+        const DEPARTMENT_DEEP_DIVE = [
+            // Note: Policing adjusted to 20.89 cents to ensure the total list equals exactly 100.00%
+            { name: "Policing", cents: 20.89, color: "#904CFF", 
+              expanded: "As the single largest municipal expense, this funding ensures our RCMP detachment has the resources for dedicated patrols, community engagement programs, and advanced crisis intervention training, directly contributing to public safety and low crime rates."
+            }, 
+            { name: "Recreation", cents: 17.2, color: "#00E0C7", 
+              // UPDATED: Now includes Centennial Regional Arena and JBS Canada Centre per user request
+              expanded: "Keeps public recreation facilities like the Centennial Regional Arena and the JBS Canada Centre affordable and well-maintained year-round, subsidizing youth and senior activities to promote healthy community living."
+            }, 
+            { name: "Transportation", cents: 16.7, color: "#FF6B6B", 
+              expanded: "Funds essential year-round maintenance, including deep pothole repair, daily snow removal on all main arteries, and maintenance of traffic signals and streetlights for safe, reliable travel."
+            }, 
+            { name: "Administration", cents: 11.0, color: "#FFA600", 
+              expanded: "Supports the core operations of City Hall, ensuring efficient processing of property taxes, utility billing, business licenses, and transparent financial reporting to the public and Council."
+            }, 
+            { name: "Parks & Green Space", cents: 6.5, color: "#5FDD90", 
+              expanded: "Maintains the city's extensive green spaces, including mowing, irrigation, tree health, playgrounds, and the full maintenance of walking trails, significantly enhancing community appeal."
+            }, 
+            { name: "Culture & Facilities", cents: 5.3, color: "#FFC0CB", 
+              expanded: "Dedicated to the upkeep of cultural infrastructure and community buildings (outside of recreation), ensuring these essential public spaces are available, functional, and safe for festivals, events, and community gatherings."
+            },
+            { name: "Fiscal & Taxation", cents: 5.1, color: "#8B4513", 
+              expanded: "Ensures financial stability and transparency. Covers expenses related to municipal investment management, debt servicing, and mandatory external auditing for reliable and ethical use of public funds."
+            },
+            { name: "Fire Services", cents: 4.11, color: "#F08080", 
+              expanded: "Funds the necessary modern equipment, protective gear (PPE), and continuous training for the Fire Department, guaranteeing rapid and effective emergency response and essential fire prevention inspections."
+            }, 
+            { name: "Community Support Services", cents: 3.3, color: "#800080", 
+              expanded: "Supports vital social programs, including seniors' assistance, family resource networks, and efforts to address affordable housing, ensuring Brooks is a supportive and inclusive community for all residents."
+            },
+            { name: "Municipal Enforcement", cents: 2.1, color: "#32CD32", 
+              expanded: "Responsible for enforcing local bylaws (e.g., parking, noise, animal control, unsightly properties). This service is crucial for resolving neighborhood disputes and maintaining the orderly functioning of the community."
+            },
+            { name: "Planning & Development", cents: 2.0, color: "#4682B4", 
+              expanded: "Manages the physical growth of the city. Reviews new building proposals, manages zoning and land-use changes, and ensures all new construction meets provincial safety standards and City requirements."
+            },
+            { name: "Council", cents: 1.8, color: "#FFD700", 
+              expanded: "Covers the costs associated with the Mayor and Council (salaries, travel, and research support). These funds enable elected officials to set city policy, manage the budget, and represent the public."
+            },
+            { name: "Economic Development", cents: 1.1, color: "#3CB371", 
+              expanded: "Invested in attracting new major businesses, promoting local tourism, and supporting local entrepreneurs. This work strengthens the tax base and creates local jobs for residents."
+            },
+            { name: "Access Transit", cents: 1.0, color: "#ADD8E6", 
+              expanded: "This contribution subsidizes the specialized public transportation service, ensuring essential, accessible mobility options are available to residents with temporary or permanent physical challenges."
+            },
+            { name: "Land", cents: 0.5, color: "#D2B48C", 
+              expanded: "Covers costs associated with managing municipal land inventory. These land holdings are strategically reserved for future essential public infrastructure (like new roads, fire halls, or parks) or for commercial sale to spur development."
+            },
+            { name: "Cemetery", cents: 0.5, color: "#B0C4DE", 
+              expanded: "Ensures the dignified, respectful, and continuous upkeep of the municipal cemetery grounds, facilities, and records."
+            },
+            { name: "Engineering", cents: 0.4, color: "#808080", 
+              expanded: "Provides the critical technical expertise and oversight for all major city projects, ensuring quality, safety, and regulatory compliance when building and maintaining roads, water lines, and public facilities."
+            },
+            { name: "Airport", cents: 0.4, color: "#FF4500", 
+              expanded: "Supports the operation and minimal maintenance of the municipal airport, which is a key local link for air ambulance and medical transfers, business operations, and agricultural services."
+            },
+        ];
+
+
+        // --- UTILITY FUNCTIONS ---
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-CA', {
+                style: 'currency',
+                currency: 'CAD',
+                minimumFractionDigits: 2,
+            }).format(amount);
+        }
+
+        function formatAssessmentInput(input) {
+            const cursorPosition = input.selectionStart;
+            const oldValue = input.value;
+            let value = input.value.replace(/[^0-9]/g, '');
+
+            if (value === '') {
+                input.value = '';
+                return;
+            }
+
+            const number = parseInt(value, 10);
+            const formattedValue = new Intl.NumberFormat('en-CA').format(number);
+
+            input.value = formattedValue;
+
+            const newLength = formattedValue.length;
+            const oldLength = oldValue.length;
+            const difference = newLength - oldLength;
+
+            if (cursorPosition !== null) {
+                input.setSelectionRange(cursorPosition + difference, cursorPosition + difference);
+            }
+        }
+        
+        // --- MAIN CALCULATOR LOGIC ---
+        function calculateTaxes() {
+            const inputElement = document.getElementById('assessmentInput');
+            const assessmentValue = parseFloat(inputElement.value.replace(/[^0-9.]/g, ''));
+
+            document.getElementById('millRateDisplay2025').textContent = RAW_MILL_RATE_2025.toFixed(8);
+
+            if (isNaN(assessmentValue) || assessmentValue <= 0) {
+                document.getElementById('totalTaxDisplay').textContent = formatCurrency(0);
+                document.getElementById('primaryBreakdown').innerHTML = '<p class="text-red-400">Please enter a valid assessment value.</p>';
+                document.getElementById('departmentDeepDive').innerHTML = ''; // Clear deep dive
+                
+                document.getElementById('taxValuePlaceholder').textContent = formatCurrency(0);
+                document.getElementById('municipalValuePlaceholder').textContent = formatCurrency(0);
+                return;
+            }
+
+            // 1. Calculate Total Tax
+            const totalTax = assessmentValue * MILL_RATE_PER_DOLLAR_2025;
+            document.getElementById('totalTaxDisplay').textContent = formatCurrency(totalTax);
+            document.getElementById('taxValuePlaceholder').textContent = formatCurrency(totalTax);
+            
+            // 2. Primary Breakdown
+            updatePrimaryBreakdown(totalTax);
+
+            // 3. Departmental Deep Dive (based on Municipal Share)
+            const municipalPortion = totalTax * PRIMARY_BREAKDOWN[0].percentage;
+            document.getElementById('municipalValuePlaceholder').textContent = formatCurrency(municipalPortion);
+            updateDepartmentDeepDive(municipalPortion);
+        }
+
+
+        // --- VISUALIZATION RENDERING ---
+
+        function updatePrimaryBreakdown(totalTax) {
+            const breakdownHtml = PRIMARY_BREAKDOWN.map(item => {
+                const shareAmount = totalTax * (item.percentage);
+
+                return `
+                    <div class="p-6 rounded-xl shadow-lg border border-white/10 transition duration-300 hover:border-wrapped-primary" style="background-color: var(--color-wrapped-card);" data-index="${item.name}">
+                        <div class="text-5xl mb-3">${item.icon}</div>
+                        <p class="text-xl font-bold title-montserrat uppercase" style="color:${item.color};">${item.name}</p>
+                        <p class="text-3xl font-black mt-1 title-montserrat text-white">${formatCurrency(shareAmount)}</p>
+                        <p class="text-base text-white/50 mt-1">${(item.percentage * 100).toFixed(0)}% of Bill</p>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('primaryBreakdown').innerHTML = breakdownHtml;
+        }
+
+        function updateDepartmentDeepDive(municipalPortion) {
+            // Sort by cents descending for a clean presentation
+            const sortedDepartments = DEPARTMENT_DEEP_DIVE.sort((a, b) => b.cents - a.cents);
+
+            const deepDiveHtml = sortedDepartments.map((item, index) => {
+                const percentageOfMunicipal = item.cents / 100;
+                const shareAmount = municipalPortion * percentageOfMunicipal;
+                
+                // Use a standard color palette for the many items to keep it clean
+                const color = item.color || '#4A90E2'; 
+
+                const combinedContent = `${item.expanded}`;
+
+
+                return `
+                    <div class="rounded-xl shadow-md overflow-hidden p-4" 
+                         style="background-color: #2e2e2e; border-left: 4px solid ${color};">
+                        
+                        <div class="flex flex-col sm:flex-row items-start">
+                            <div class="flex-shrink-0 w-full sm:w-1/4 mb-2 sm:mb-0">
+                                <h4 class="text-lg font-bold uppercase title-montserrat" style="color: ${color};">${item.name}</h4>
+                                <!-- Dollar amount size is text-xl -->
+                                <p class="text-xl font-black text-white">${formatCurrency(shareAmount)}</p>
+                            </div>
+                            <div class="flex-grow text-white/80 text-base ml-0 sm:ml-4 font-inter leading-relaxed">
+                                ${combinedContent}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('departmentDeepDive').innerHTML = deepDiveHtml;
+        }
+
+        // --- SCROLL INDICATOR LOGIC ---
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        
+        function checkScroll() {
+            // Document height
+            const wrappedContent = document.getElementById('wrapped-content');
+            if (!wrappedContent) return; // Guard clause
+            
+            const contentHeight = wrappedContent.offsetHeight;
+            // Visible viewport height
+            const viewportHeight = window.innerHeight;
+            // Scroll position from the top
+            const scrollY = window.scrollY;
+
+            // Define a threshold (e.g., hide when 100px from the absolute bottom)
+            const threshold = 100; 
+
+            // Calculate if the bottom of the viewport has reached the threshold area
+            const scrollBottom = scrollY + viewportHeight;
+            const isNearBottom = (scrollBottom >= contentHeight - threshold);
+            
+            // Scroll indicator should only be hidden when near the bottom
+            if (isNearBottom) {
+                scrollIndicator.classList.add('hidden');
+            } else {
+                // Otherwise, ensure it is visible (including when at the very top)
+                scrollIndicator.classList.remove('hidden');
+            }
+        }
+        
+        
+        // Initialize the calculator and slides on load
+        window.onload = () => {
+            const inputElement = document.getElementById('assessmentInput');
+            // Check if the input element exists before attempting to format/calculate
+            if (inputElement) {
+                formatAssessmentInput(inputElement);
+                calculateTaxes();
+            }
+            
+            // Initial check and set listener for the scroll indicator
+            checkScroll(); 
+            window.addEventListener('scroll', checkScroll);
+        };
+
+    </script>
+
+</body>
+</html>
